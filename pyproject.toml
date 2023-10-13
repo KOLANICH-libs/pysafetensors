@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.2.0", "setuptools_scm[toml]>=3.4.3", "kaitaiStructCompile[toml]"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysafetensors"
+readme = "ReadMe.md"
+description = "A lib parsing safetensors format without involving Rust."
+authors = [{name = "KOLANICH"}]
+classifiers = [
+	"Development Status :: 4 - Beta",
+	"Environment :: Other Environment",
+	"Intended Audience :: Developers",
+	"License :: Public Domain",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python",
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3 :: Only",
+	"Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["pysafetensors"]
+license = {text = "Unlicense"}
+requires-python = ">=3.4"
+dynamic = ["version"]
+dependencies = [
+	"safetensors_schema",  # @ git+https://codeberg.org/KFmts/safetensors_schema.py
+	"kaitaistruct", # @ git+https://github.com/kaitai-io/kaitai_struct_python_runtime
+]
+
+[project.urls]
+Homepage = "https://codeberg.org/KFmts/pysafetensors.py"
+
+[tool.setuptools]
+zip-safe = true
+
+[tool.setuptools.packages.find]
+include = ["pysafetensors", "pysafetensors.*"]
+
+[tool.setuptools_scm]
+
+[tool.black]
+line-length = 100500
+
+[tool.kaitai]
+
+[tool.kaitai.repos."https://codeberg.org/KFmts/kaitai_struct_formats.git"."safetensors"]
+update = true
+search = false
+localPath = "kaitai_struct_formats" # rel to pyproject.toml dir
+outputDir = "pysafetensors/kaitai" # rel to localPath
+
+[tool.kaitai.repos."https://codeberg.org/KFmts/kaitai_struct_formats.git"."safetensors".formats.safetensors]
+path = "serialization/safetensors.ksy"
+
+[tool.kaitai.repos."https://codeberg.org/KFmts/kaitai_struct_formats.git"."safetensors".formats.safetensors.postprocess]
+fixEnums = []
+applyPatches = ["patches/waveform_debug.patch"]
