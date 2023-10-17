@@ -1,5 +1,8 @@
 from pathlib import Path
 import typing
+from warnings import warn
+
+warn("We have moved from M$ GitHub to https://codeberg.org/KFmts/pysafetensors , read why on https://codeberg.org/KOLANICH/Fuck-GuanTEEnomo .")
 
 from .kaitai.safetensors import Safetensors
 from .numpy import toNumPy
